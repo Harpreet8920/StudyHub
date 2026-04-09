@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #ecfeff, #f8fafc);
+  color: #0f172a;
+}
+
+.nav {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-weight: 700;
+  color: #0f766e;
+}
+
+nav {
+  display: flex;
+  gap: 14px;
+}
+
+a {
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.hero {
+  max-width: 860px;
+  margin: 70px auto;
+  text-align: center;
+  background: #fff;
+  border-radius: 14px;
+  padding: 34px;
+}
+
+button {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #0f766e;
+  color: #fff;
+  cursor: pointer;
+}
