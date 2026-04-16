@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="api-base-url" content="http://localhost:5000/api" />
+    <title>StudyHub Lite | Home</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="home">
+    <header class="nav-wrap">
+      <nav class="navbar">
+        <a href="./index.html" class="brand">StudyHub Lite</a>
+        <div class="nav-links">
+          <a href="./index.html" data-nav="home">Home</a>
+          <a href="./login.html" data-auth="guest">Login</a>
+          <a href="./signup.html" data-auth="guest">Signup</a>
+          <a href="./dashboard.html" data-nav="dashboard">Dashboard</a>
+          <button type="button" class="ghost-btn" id="logoutBtn" data-auth="user">Logout</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="hero-page">
+      <section class="hero">
+        <p class="hero-tag">Student Productivity, Simplified</p>
+        <h1>Organize your study life with StudyHub Lite</h1>
+        <p>
+          Keep your tasks clear, your notes handy, and your goals on track with a clean dashboard
+          built for students.
+        </p>
+        <div class="hero-actions">
+          <button type="button" class="primary-btn" id="getStartedBtn">Get Started</button>
+          <a href="./signup.html" class="secondary-btn inline-link-btn">Create Free Account</a>
+        </div>
+      </section>
+
+      <section class="feature-grid">
+        <article class="feature-card">
+          <h3>Track Tasks</h3>
+          <p>Create, complete, and manage tasks daily with a simple workflow.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Secure Login</h3>
+          <p>JWT-based authentication keeps student data private.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Focus Better</h3>
+          <p>Minimal UI helps you concentrate on what matters most.</p>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
+

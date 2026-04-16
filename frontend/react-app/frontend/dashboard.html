@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="api-base-url" content="http://localhost:5000/api" />
+    <title>StudyHub Lite | Dashboard</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="dashboard">
+    <header class="nav-wrap">
+      <nav class="navbar">
+        <a href="./index.html" class="brand">StudyHub Lite</a>
+        <div class="nav-links">
+          <a href="./index.html" data-nav="home">Home</a>
+          <a href="./login.html" data-auth="guest">Login</a>
+          <a href="./signup.html" data-auth="guest">Signup</a>
+          <a href="./dashboard.html" data-nav="dashboard">Dashboard</a>
+          <button type="button" class="ghost-btn" id="logoutBtn" data-auth="user">Logout</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="dashboard-page">
+      <section class="dashboard-head">
+        <h2>Student Dashboard</h2>
+        <div class="dashboard-actions">
+          <button type="button" class="ghost-btn" id="themeToggleBtn">Dark Mode</button>
+          <button type="button" class="secondary-btn" id="dashboardLogoutBtn">Logout</button>
+        </div>
+      </section>
+
+      <p class="error-msg" id="dashboardError" hidden></p>
+      <div class="toast" id="dashboardToast" role="status" aria-live="polite" hidden></div>
+
+      <section class="dashboard-grid">
+        <section class="task-panel card">
+          <h3>Tasks</h3>
+
+          <form id="taskForm" class="inline-form" novalidate>
+            <input id="taskName" name="task_name" type="text" placeholder="Add new task" required />
+
+            <select id="taskPriority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+
+            <input id="taskDueDate" name="due_date" type="date" />
+
+            <select id="taskCategory" name="category">
+              <option value="Study" selected>Study</option>
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+            </select>
+
+            <button type="submit" class="primary-btn" id="taskSubmitBtn">Add</button>
+            <button type="button" class="ghost-btn" id="taskCancelBtn" hidden>Cancel</button>
+          </form>
+
+          <form class="filters-form" id="filtersForm" novalidate>
+            <input id="searchInput" type="text" placeholder="Search by task name" />
+
+            <select id="statusFilter">
+              <option value="all" selected>All</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+            </select>
+
+            <select id="categoryFilter">
+              <option value="all" selected>All Categories</option>
+              <option value="Study">Study</option>
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+            </select>
+          </form>
+
+          <div class="task-list" id="taskList"></div>
+        </section>
+
+        <section class="notes-panel card">
+          <h3>Quick Notes</h3>
+
+          <form id="notesForm" class="notes-form" novalidate>
+            <input id="noteInput" type="text" placeholder="Write a quick note" />
+            <button type="submit" class="primary-btn">Save</button>
+          </form>
+
+          <div class="notes-list" id="notesList"></div>
+        </section>
+      </section>
+
+      <section class="stats-card">
+        <h3>Task Overview</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span>Total</span>
+            <strong id="statTotal">0</strong>
+          </div>
+          <div class="stat-item">
+            <span>Completed</span>
+            <strong id="statCompleted">0</strong>
+          </div>
+          <div class="stat-item">
+            <span>Pending</span>
+            <strong id="statPending">0</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
+
