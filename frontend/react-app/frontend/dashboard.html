@@ -26,11 +26,13 @@
         <aside class="dashboard-sidebar card">
           <h2>Workspace</h2>
           <p class="muted-text">Plan tasks, exams, goals, and focus sessions from one dashboard.</p>
-          <a href="#taskPanel">Tasks</a>
+          <a href="#statsPanel">Productivity Stats</a>
           <a href="#plannerPanel">Academic Planner</a>
           <a href="#goalsPanel">Goals</a>
           <a href="#focusPanel">Pomodoro</a>
-          <a href="#alertsPanel">Smart Alerts</a>
+          <a href="#alertsPanel">Alerts</a>
+          <a href="#taskPanel">Tasks</a>
+          <a href="#notesPanel">Notes</a>
           <button type="button" class="secondary-btn" id="dashboardLogoutBtn">Logout</button>
         </aside>
 
@@ -46,28 +48,37 @@
           <p class="error-msg" id="dashboardError" hidden></p>
           <p class="success-msg" id="dashboardSuccess" hidden></p>
 
-          <section class="stats-grid">
-            <article class="stat-item">
-              <span>Total Tasks</span>
-              <strong id="statTotal">0</strong>
-            </article>
-            <article class="stat-item">
-              <span>Completed</span>
-              <strong id="statCompleted">0</strong>
-            </article>
-            <article class="stat-item">
-              <span>Pending</span>
-              <strong id="statPending">0</strong>
-            </article>
-            <article class="stat-item">
-              <span>Weekly Completion</span>
-              <strong id="statWeekly">0%</strong>
-            </article>
+          <section class="card panel section-card" id="statsPanel">
+            <div class="panel-heading">
+              <h3>Productivity Stats</h3>
+              <p class="muted-text">Track how much work you are completing this week.</p>
+            </div>
+            <div class="stats-grid">
+              <article class="stat-item">
+                <span>Total Tasks</span>
+                <strong id="statTotal">0</strong>
+              </article>
+              <article class="stat-item">
+                <span>Completed</span>
+                <strong id="statCompleted">0</strong>
+              </article>
+              <article class="stat-item">
+                <span>Pending</span>
+                <strong id="statPending">0</strong>
+              </article>
+              <article class="stat-item">
+                <span>Weekly Completion</span>
+                <strong id="statWeekly">0%</strong>
+              </article>
+            </div>
           </section>
 
           <section class="dashboard-panels">
-            <section class="card panel" id="taskPanel">
-              <h3>Task Manager</h3>
+            <section class="card panel panel-wide" id="taskPanel">
+              <div class="panel-heading">
+                <h3>Notes & Tasks List</h3>
+                <p class="muted-text">Capture tasks, prioritize them, and keep your list actionable.</p>
+              </div>
 
               <form id="taskForm" class="inline-form" novalidate>
                 <input id="taskName" name="task_name" type="text" placeholder="Add a new task" required />
@@ -105,7 +116,10 @@
             </section>
 
             <section class="card panel" id="plannerPanel">
-              <h3>Academic Planner</h3>
+              <div class="panel-heading">
+                <h3>Academic Planner</h3>
+                <p class="muted-text">Organize assignments, exams, and submissions by date.</p>
+              </div>
               <form id="plannerForm" class="inline-form" novalidate>
                 <select id="plannerType" required>
                   <option value="assignment" selected>Assignment</option>
@@ -121,7 +135,10 @@
             </section>
 
             <section class="card panel" id="goalsPanel">
-              <h3>Goal Progress Tracker</h3>
+              <div class="panel-heading">
+                <h3>Goal Progress Tracker</h3>
+                <p class="muted-text">Measure milestone completion and update progress fast.</p>
+              </div>
               <form id="goalForm" class="inline-form" novalidate>
                 <input id="goalTitle" type="text" placeholder="Goal (e.g. Finish DBMS syllabus)" required />
                 <input id="goalTarget" type="number" min="1" placeholder="Target units" required />
@@ -132,7 +149,10 @@
             </section>
 
             <section class="card panel" id="focusPanel">
-              <h3>Pomodoro Focus Timer</h3>
+              <div class="panel-heading">
+                <h3>Pomodoro Focus Timer</h3>
+                <p class="muted-text">Run focus and break cycles to build consistent deep work.</p>
+              </div>
               <div class="pomodoro-display" id="pomodoroTime">25:00</div>
               <p class="muted-text" id="pomodoroMode">Focus Session</p>
               <p class="muted-text">Completed Focus Sessions: <strong id="sessionCount">0</strong></p>
@@ -144,8 +164,23 @@
             </section>
 
             <section class="card panel" id="alertsPanel">
-              <h3>Smart Alerts</h3>
+              <div class="panel-heading">
+                <h3>Smart Alerts</h3>
+                <p class="muted-text">Stay aware of urgent deadlines and missed items.</p>
+              </div>
               <div class="alerts-list" id="alertsList"></div>
+            </section>
+
+            <section class="card panel" id="notesPanel">
+              <div class="panel-heading">
+                <h3>Quick Notes</h3>
+                <p class="muted-text">Save short study notes and reminders for this week.</p>
+              </div>
+              <form id="notesForm" class="inline-form" novalidate>
+                <input id="noteText" type="text" placeholder="Write a quick note..." required />
+                <button type="submit" class="primary-btn">Add Note</button>
+              </form>
+              <div class="notes-list" id="notesList"></div>
             </section>
           </section>
         </section>

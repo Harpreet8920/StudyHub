@@ -7,6 +7,7 @@
   const PLANNER_KEY = "studyhub_planner_items";
   const GOALS_KEY = "studyhub_goals";
   const POMODORO_KEY = "studyhub_pomodoro_sessions";
+  const NOTES_KEY = "studyhub_notes";
 
   function getToken() {
     return localStorage.getItem(TOKEN_KEY);
@@ -39,19 +40,23 @@
 
   function setupThemeToggleOnHome() {
     const page = document.body.dataset.page;
-    const toggle = document.getElementById("homeThemeToggle");
-    if (page !== "home" || !toggle) return;
+    const toggles = Array.from(document.querySelectorAll("[data-theme-toggle]"));
+    if (page !== "home" || !toggles.length) return;
 
     function renderToggleText() {
       const isDark = document.body.classList.contains("dark-mode");
-      toggle.textContent = isDark ? "Light Mode" : "Dark Mode";
+      toggles.forEach((toggle) => {
+        toggle.textContent = isDark ? "Light Mode" : "Dark Mode";
+      });
     }
 
     renderToggleText();
-    toggle.addEventListener("click", () => {
-      const isDark = document.body.classList.contains("dark-mode");
-      setTheme(isDark ? "light" : "dark");
-      renderToggleText();
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const isDark = document.body.classList.contains("dark-mode");
+        setTheme(isDark ? "light" : "dark");
+        renderToggleText();
+      });
     });
   }
 
@@ -302,6 +307,9 @@
     const timerResetBtn = document.getElementById("timerResetBtn");
 
     const alertsList = document.getElementById("alertsList");
+    const notesForm = document.getElementById("notesForm");
+    const noteText = document.getElementById("noteText");
+    const notesList = document.getElementById("notesList");
 
     if (
       !dashboardError ||
@@ -364,6 +372,14 @@
       completedFocusSessions = 0;
     }
 
+    let notes = [];
+    try {
+      notes = JSON.parse(localStorage.getItem(NOTES_KEY) || "[]");
+      if (!Array.isArray(notes)) notes = [];
+    } catch (_error) {
+      notes = [];
+    }
+
     const TIMER = {
       focusSeconds: 25 * 60,
       breakSeconds: 5 * 60,
@@ -394,6 +410,10 @@
 
     function saveGoals() {
       localStorage.setItem(GOALS_KEY, JSON.stringify(goals));
+    }
+
+    function saveNotes() {
+      localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
     }
 
     function renderStats() {
@@ -577,6 +597,28 @@
       pomodoroTime.textContent = `${mins}:${secs}`;
       pomodoroMode.textContent = TIMER.mode === "focus" ? "Focus Session" : "Break Session";
       sessionCount.textContent = String(completedFocusSessions);
+    }
+
+    function renderNotes() {
+      if (!notesList) return;
+
+      if (!notes.length) {
+        notesList.innerHTML = '<p class="muted-text">No notes yet. Add a quick reminder.</p>';
+        return;
+      }
+
+      notesList.innerHTML = notes
+        .map(
+          (note) => `
+            <article class="note-item">
+              <div class="goal-head">
+                <p>${escapeHtml(note.text)}</p>
+                <button type="button" class="danger-btn" data-note-delete="${note.id}">Delete</button>
+              </div>
+            </article>
+          `
+        )
+        .join("");
     }
 
     function stopPomodoroInterval() {
@@ -845,6 +887,32 @@
       }
     });
 
+    if (notesForm && noteText && notesList) {
+      notesForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const text = noteText.value.trim();
+        if (!text) {
+          showError("Write a short note before adding.");
+          return;
+        }
+
+        notes.unshift({ id: Date.now(), text });
+        saveNotes();
+        notesForm.reset();
+        renderNotes();
+        showSuccess("Note saved.");
+      });
+
+      notesList.addEventListener("click", (event) => {
+        const deleteBtn = event.target.closest("button[data-note-delete]");
+        if (!deleteBtn) return;
+        const noteId = Number(deleteBtn.dataset.noteDelete);
+        notes = notes.filter((note) => Number(note.id) !== noteId);
+        saveNotes();
+        renderNotes();
+      });
+    }
+
     timerStartBtn.addEventListener("click", startPomodoro);
     timerPauseBtn.addEventListener("click", stopPomodoroInterval);
     timerResetBtn.addEventListener("click", resetPomodoro);
@@ -854,6 +922,7 @@
     renderGoals();
     renderPomodoro();
     renderAlerts();
+    renderNotes();
     fetchTasks();
   }
 

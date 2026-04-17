@@ -13,17 +13,20 @@
         <a href="./index.html" class="brand">StudyHub</a>
         <div class="nav-links">
           <a href="./index.html" data-nav="home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#why-studyhub">Why StudyHub</a>
+          <a href="#faq">FAQ</a>
           <a href="./login.html" data-auth="guest">Login</a>
           <a href="./signup.html" data-auth="guest">Signup</a>
           <a href="./dashboard.html" data-nav="dashboard">Dashboard</a>
           <button type="button" class="ghost-btn" id="logoutBtn" data-auth="user">Logout</button>
-          <button type="button" class="ghost-btn" id="homeThemeToggle">Dark Mode</button>
+          <button type="button" class="ghost-btn" id="homeThemeToggle" data-theme-toggle>Dark Mode</button>
         </div>
       </nav>
     </header>
 
     <main class="hero-page">
-      <section class="hero premium-hero">
+      <section class="hero premium-hero" id="hero">
         <div class="hero-content">
           <p class="hero-tag">Academic Planning for Ambitious Students</p>
           <h1>Run your semester with clarity, focus, and consistent progress.</h1>
@@ -34,10 +37,12 @@
           <div class="hero-actions">
             <button type="button" class="primary-btn" id="getStartedBtn">Open Dashboard</button>
             <a href="./signup.html" class="secondary-btn inline-link-btn">Create Free Account</a>
+            <a href="#features" class="ghost-btn inline-link-btn">Explore Features</a>
+            <button type="button" class="ghost-btn" data-theme-toggle>Dark Mode</button>
           </div>
         </div>
         <div class="hero-preview card">
-          <h3>This Week in StudyHub</h3>
+          <h3>Today in StudyHub</h3>
           <ul>
             <li>Track pending assignments and exam dates</li>
             <li>Measure weekly completion performance</li>
@@ -47,20 +52,154 @@
         </div>
       </section>
 
-      <section class="feature-grid">
-        <article class="feature-card">
-          <h3>Academic Planner</h3>
-          <p>Organize assignments, submissions, deadlines, and exams in one timeline view.</p>
-        </article>
-        <article class="feature-card">
-          <h3>Productivity Dashboard</h3>
-          <p>See your total, completed, pending, and weekly completion trends at a glance.</p>
-        </article>
-        <article class="feature-card">
-          <h3>Focus & Goals</h3>
-          <p>Use Pomodoro sessions and goal progress tracking to keep momentum every day.</p>
-        </article>
+      <section class="home-section" id="features">
+        <div class="section-heading">
+          <p class="eyebrow">Core Features</p>
+          <h2>Everything students need to stay organized and productive</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Academic Planner</h3>
+            <p>Plan assignments, submissions, exam dates, and semester priorities in one place.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Productivity Tracking</h3>
+            <p>Monitor completed work, pending tasks, and weekly performance trends instantly.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Focus Timer</h3>
+            <p>Use Pomodoro sessions to keep deep focus and build a steady study rhythm.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Goal Tracking</h3>
+            <p>Break large academic goals into measurable milestones and track your progress.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Smart Alerts</h3>
+            <p>Get reminders for overdue tasks, upcoming exams, and critical deadlines.</p>
+          </article>
+        </div>
       </section>
+
+      <section class="home-section why-grid" id="why-studyhub">
+        <div class="section-heading">
+          <p class="eyebrow">Why Choose StudyHub</p>
+          <h2>Built for students who want consistent academic progress</h2>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <h3>Save Time</h3>
+            <p>Stop jumping between tools and manage your entire academic workflow in one dashboard.</p>
+          </article>
+          <article class="benefit-card">
+            <h3>Reduce Stress</h3>
+            <p>Stay ahead with clear priorities, due-date visibility, and dependable reminders.</p>
+          </article>
+          <article class="benefit-card">
+            <h3>Improve Consistency</h3>
+            <p>Turn discipline into a system with repeatable planning, focus sessions, and tracking.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="home-section" id="dashboard-preview">
+        <div class="section-heading">
+          <p class="eyebrow">Dashboard Preview</p>
+          <h2>A structured workspace designed for daily execution</h2>
+        </div>
+        <div class="preview-grid">
+          <article class="preview-card">
+            <h4>Productivity Stats</h4>
+            <p>Total Tasks: 24</p>
+            <p>Completed: 18</p>
+            <p>Weekly Completion: 75%</p>
+          </article>
+          <article class="preview-card">
+            <h4>Academic Planner</h4>
+            <p>DBMS Assignment - Apr 20</p>
+            <p>Math Midterm - Apr 24</p>
+            <p>OS Lab Submission - Apr 26</p>
+          </article>
+          <article class="preview-card">
+            <h4>Goals & Focus</h4>
+            <p>Syllabus Goal: 62%</p>
+            <p>Pomodoro Sessions: 9</p>
+            <p>Next Focus Block: 5:30 PM</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="home-section" id="testimonials">
+        <div class="section-heading">
+          <p class="eyebrow">Student Feedback</p>
+          <h2>What students say about StudyHub</h2>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <p>
+              "I finally know what to do every day. My weekly planning is faster and my deadlines no
+              longer surprise me."
+            </p>
+            <strong>Priya S., B.Tech Student</strong>
+          </article>
+          <article class="testimonial-card">
+            <p>
+              "The focus timer plus goal tracker improved my consistency. Study sessions are more
+              intentional now."
+            </p>
+            <strong>Rohan M., Engineering Student</strong>
+          </article>
+          <article class="testimonial-card">
+            <p>
+              "Simple, clean, and practical. I use it daily for assignments, exam prep, and progress
+              tracking."
+            </p>
+            <strong>Aisha K., University Student</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="home-section" id="faq">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2>Common questions</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is StudyHub free for students?</summary>
+            <p>Yes. You can sign up and start planning, tracking, and focusing with no initial cost.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I use StudyHub on mobile?</summary>
+            <p>Yes. The layout is responsive and designed to work smoothly on phones, tablets, and desktops.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Does it include reminders for upcoming deadlines?</summary>
+            <p>Yes. Smart alerts highlight overdue tasks, tomorrow deadlines, and upcoming exams.</p>
+          </details>
+        </div>
+      </section>
+
+      <footer class="site-footer" id="footer">
+        <div>
+          <a href="./index.html" class="brand">StudyHub</a>
+          <p class="muted-text">Student productivity platform for planning, focus, and outcomes.</p>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html">Home</a>
+          <a href="#features">Features</a>
+          <a href="#faq">FAQ</a>
+          <a href="./login.html">Login</a>
+          <a href="./signup.html">Signup</a>
+        </div>
+        <div class="footer-links">
+          <a href="#">Contact</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Instagram</a>
+          <a href="#">X / Twitter</a>
+        </div>
+        <p class="copyright">Copyright © 2026 StudyHub. All rights reserved.</p>
+      </footer>
     </main>
 
     <script type="module" src="./script.js"></script>
