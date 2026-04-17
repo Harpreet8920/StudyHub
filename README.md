@@ -36,8 +36,15 @@ Run the app locally, sign up, and start managing tasks and notes from the dashbo
 ```text
 /studyhub
   /frontend
-    /html-css-js
     /react-app
+      /frontend
+        index.html
+        login.html
+        signup.html
+        dashboard.html
+        style.css
+        script.js
+        /assets
   /backend
   /database
 ```

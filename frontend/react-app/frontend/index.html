@@ -1,52 +1,64 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="api-base-url" content="http://localhost:5000/api" />
-    <title>StudyHub Lite | Home</title>
+    <title>StudyHub | Student Productivity Platform</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body data-page="home">
     <header class="nav-wrap">
       <nav class="navbar">
-        <a href="./index.html" class="brand">StudyHub Lite</a>
+        <a href="./index.html" class="brand">StudyHub</a>
         <div class="nav-links">
           <a href="./index.html" data-nav="home">Home</a>
           <a href="./login.html" data-auth="guest">Login</a>
           <a href="./signup.html" data-auth="guest">Signup</a>
           <a href="./dashboard.html" data-nav="dashboard">Dashboard</a>
           <button type="button" class="ghost-btn" id="logoutBtn" data-auth="user">Logout</button>
+          <button type="button" class="ghost-btn" id="homeThemeToggle">Dark Mode</button>
         </div>
       </nav>
     </header>
 
     <main class="hero-page">
-      <section class="hero">
-        <p class="hero-tag">Student Productivity, Simplified</p>
-        <h1>Organize your study life with StudyHub Lite</h1>
-        <p>
-          Keep your tasks clear, your notes handy, and your goals on track with a clean dashboard
-          built for students.
-        </p>
-        <div class="hero-actions">
-          <button type="button" class="primary-btn" id="getStartedBtn">Get Started</button>
-          <a href="./signup.html" class="secondary-btn inline-link-btn">Create Free Account</a>
+      <section class="hero premium-hero">
+        <div class="hero-content">
+          <p class="hero-tag">Academic Planning for Ambitious Students</p>
+          <h1>Run your semester with clarity, focus, and consistent progress.</h1>
+          <p>
+            StudyHub brings your tasks, assignments, exam plans, goals, and focus sessions into one
+            professional workspace designed for real academic outcomes.
+          </p>
+          <div class="hero-actions">
+            <button type="button" class="primary-btn" id="getStartedBtn">Open Dashboard</button>
+            <a href="./signup.html" class="secondary-btn inline-link-btn">Create Free Account</a>
+          </div>
+        </div>
+        <div class="hero-preview card">
+          <h3>This Week in StudyHub</h3>
+          <ul>
+            <li>Track pending assignments and exam dates</li>
+            <li>Measure weekly completion performance</li>
+            <li>Run Pomodoro sessions to stay focused</li>
+            <li>Monitor long-term syllabus goals</li>
+          </ul>
         </div>
       </section>
 
       <section class="feature-grid">
         <article class="feature-card">
-          <h3>Track Tasks</h3>
-          <p>Create, complete, and manage tasks daily with a simple workflow.</p>
+          <h3>Academic Planner</h3>
+          <p>Organize assignments, submissions, deadlines, and exams in one timeline view.</p>
         </article>
         <article class="feature-card">
-          <h3>Secure Login</h3>
-          <p>JWT-based authentication keeps student data private.</p>
+          <h3>Productivity Dashboard</h3>
+          <p>See your total, completed, pending, and weekly completion trends at a glance.</p>
         </article>
         <article class="feature-card">
-          <h3>Focus Better</h3>
-          <p>Minimal UI helps you concentrate on what matters most.</p>
+          <h3>Focus & Goals</h3>
+          <p>Use Pomodoro sessions and goal progress tracking to keep momentum every day.</p>
         </article>
       </section>
     </main>
@@ -54,4 +66,3 @@
     <script type="module" src="./script.js"></script>
   </body>
 </html>
-
