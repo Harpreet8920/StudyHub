@@ -78,9 +78,12 @@ In `/backend`, create `.env` from `.env.example`:
 ```env
 PORT=5000
 DB_HOST=localhost
+DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=studyhub
+DB_SSL=false
+DB_SSL_REJECT_UNAUTHORIZED=true
 JWT_SECRET=replace_with_a_strong_secret
 FRONTEND_URL=http://localhost:5173
 ```
@@ -105,19 +108,51 @@ Runs on: `http://localhost:5173`
 
 ## 6) Deployment
 
-This project can be deployed as two separate services:
+This project is best deployed as three separate services:
 
-- Backend: deploy the `backend` folder to any Node.js host such as Render, Railway, or Heroku.
-- Frontend: deploy the `frontend/react-app` folder to Vercel, Netlify, or any static host.
+- Frontend: `frontend/react-app` (Vite static build)
+- Backend API: `backend` (Node.js + Express)
+- Database: managed MySQL (Aiven MySQL recommended for lowest cost)
 
-Make sure to set these environment variables for the backend service:
+Recommended stack:
+
+- Frontend on Vercel (Hobby)
+- Backend on Render Web Service (Free or Starter)
+- MySQL on Aiven (Free tier for small hobby usage)
+
+### Frontend deployment (Vercel)
+
+- Root directory: `frontend/react-app`
+- Build command: `npm run build`
+- Output directory: `dist`
+- Environment variable: `VITE_API_BASE_URL=https://<your-backend-domain>/api`
+
+### Backend deployment (Render Web Service)
+
+- Root directory: `backend`
+- Build command: `npm install`
+- Start command: `npm start`
+- Ensure your app uses `process.env.PORT` (already configured)
+
+Set these environment variables for the backend service:
 
 - `DB_HOST`
+- `DB_PORT`
 - `DB_USER`
 - `DB_PASSWORD`
 - `DB_NAME`
+- `DB_SSL` (`true` for most managed cloud MySQL services)
+- `DB_SSL_REJECT_UNAUTHORIZED` (`true` by default, can be `false` if provider requires)
 - `JWT_SECRET`
-- `FRONTEND_URL` (the deployed frontend URL)
+- `FRONTEND_URL` (deployed frontend URL; supports comma-separated list)
+
+### Database deployment (Aiven MySQL)
+
+1. Create a MySQL service in Aiven.
+2. Copy connection details (`host`, `port`, `user`, `password`, `database`).
+3. Set backend env variables using those values.
+4. Set `DB_SSL=true` for cloud connection.
+5. Deploy backend; tables are auto-initialized on startup.
 
 For the frontend, set `VITE_API_BASE_URL` to your deployed backend API URL, for example:
 

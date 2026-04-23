@@ -1,6 +1,11 @@
 const mysql = require("mysql2/promise");
 require("dotenv").config();
 
+function parseBoolean(value, fallback = false) {
+  if (value === undefined || value === null || value === "") return fallback;
+  return String(value).toLowerCase() === "true";
+}
+
 async function ensureColumn(connection, dbName, tableName, columnName, definition) {
   const [rows] = await connection.query(
     `
@@ -18,10 +23,17 @@ async function ensureColumn(connection, dbName, tableName, columnName, definitio
 
 async function initializeDatabase() {
   const dbName = process.env.DB_NAME || "studyhub";
+  const useSsl = parseBoolean(process.env.DB_SSL, false);
   const connection = await mysql.createConnection({
     host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT || 3306),
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
+    password: process.env.DB_PASSWORD,
+    ssl: useSsl
+      ? {
+          rejectUnauthorized: parseBoolean(process.env.DB_SSL_REJECT_UNAUTHORIZED, true)
+        }
+      : undefined
   });
 
   await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);

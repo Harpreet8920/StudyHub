@@ -1,6 +1,20 @@
 (() => {
-  const API_BASE_URL =
-    document.querySelector('meta[name="api-base-url"]')?.content || "http://localhost:5000/api";
+  function normalizeApiBaseUrl(url) {
+    if (!url) return "";
+    const normalized = String(url).trim();
+    if (!normalized || normalized === "undefined" || /^%[A-Z0-9_]+%$/i.test(normalized)) return "";
+    return normalized.replace(/\/+$/, "");
+  }
+
+  const API_BASE_URL = (() => {
+    const fromVite = normalizeApiBaseUrl(import.meta.env.VITE_API_BASE_URL);
+    if (fromVite) return fromVite;
+
+    const fromMeta = normalizeApiBaseUrl(document.querySelector('meta[name="api-base-url"]')?.content);
+    if (fromMeta) return fromMeta;
+
+    return "http://localhost:5000/api";
+  })();
 
   const TOKEN_KEY = "studyhub_token";
   const THEME_KEY = "studyhub_theme";
