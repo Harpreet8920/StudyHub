@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="api-base-url" content="http://localhost:5000/api" />
+    <meta name="api-base-url" content="" />
     <title>StudyHub Lite | Signup</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
@@ -16,7 +16,14 @@
           <a href="./login.html" data-auth="guest">Login</a>
           <a href="./signup.html" data-auth="guest">Signup</a>
           <a href="./dashboard.html" data-nav="dashboard">Dashboard</a>
-          <button type="button" class="ghost-btn" id="logoutBtn" data-auth="user">Logout</button>
+          <button
+            type="button"
+            class="ghost-btn"
+            id="logoutBtn"
+            data-auth="user"
+          >
+            Logout
+          </button>
         </div>
       </nav>
     </header>
@@ -26,18 +33,39 @@
         <h2>Signup</h2>
 
         <label for="username">Username</label>
-        <input id="username" type="text" name="username" autocomplete="name" required />
+        <input
+          id="username"
+          type="text"
+          name="username"
+          autocomplete="name"
+          required
+        />
 
         <label for="email">Email</label>
-        <input id="email" type="email" name="email" autocomplete="email" required />
+        <input
+          id="email"
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+        />
 
         <label for="password">Password</label>
-        <input id="password" type="password" name="password" autocomplete="new-password" required minlength="6" />
+        <input
+          id="password"
+          type="password"
+          name="password"
+          autocomplete="new-password"
+          required
+          minlength="6"
+        />
 
         <p class="error-msg" id="signupError" hidden></p>
         <p class="success-msg" id="signupSuccess" hidden></p>
 
-        <button type="submit" class="primary-btn" id="signupSubmitBtn">Signup</button>
+        <button type="submit" class="primary-btn" id="signupSubmitBtn">
+          Signup
+        </button>
         <p>Already registered? <a href="./login.html">Login</a></p>
       </form>
     </main>
@@ -45,4 +73,3 @@
     <script type="module" src="./script.js"></script>
   </body>
 </html>
-

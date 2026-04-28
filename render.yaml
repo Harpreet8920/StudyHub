@@ -1,0 +1,50 @@
+# Render Blueprint for StudyHub Full-Stack Deployment
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # Backend API Service
+  - type: web
+    name: studyhub-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: studyhub/backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DB_SSL
+        value: "true"
+      - key: DB_SSL_REJECT_UNAUTHORIZED
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      # MANUALLY SET THESE AFTER CREATING THE DATABASE:
+      # - key: DB_HOST
+      #   value: your-db-host
+      # - key: DB_PORT
+      #   value: 3306
+      # - key: DB_USER
+      #   value: your-db-user
+      # - key: DB_PASSWORD
+      #   value: your-db-password
+      # - key: DB_NAME
+      #   value: studyhub
+      # SET THIS AFTER DEPLOYING THE FRONTEND:
+      # - key: FRONTEND_URL
+      #   value: https://your-frontend-url.onrender.com
+
+  # Frontend Static Site
+  - type: static
+    name: studyhub-web
+    region: oregon
+    plan: free
+    rootDir: studyhub/frontend/react-app
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    # MANUALLY SET THIS AFTER DEPLOYING THE BACKEND:
+    # - key: VITE_API_BASE_URL
+    #   value: https://studyhub-api.onrender.com/api
