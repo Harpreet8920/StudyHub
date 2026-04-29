@@ -11,11 +11,7 @@ dotenv.config();
 
 const dbConfig = getDatabaseConfig();
 
-// 1. Check for basic app secrets
-const requiredEnv = ["JWT_SECRET"];
-const missingEnv = requiredEnv.filter((key) => !process.env[key]);
-
-// 2. Check for Database connection info
+// Check for Database connection info
 // We are "OK" if we have a DATABASE_URL OR the individual components
 const hasDbUrl = !!process.env.DATABASE_URL;
 const missingDbComponents = ["host", "user", "password", "database"].filter((key) => !dbConfig[key]);
