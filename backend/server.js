@@ -2,16 +2,23 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const pool = require("./config/db");
+const { getDatabaseConfig } = require("./config/env");
 const initializeDatabase = require("./config/initDb");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 
 dotenv.config();
 
-const requiredEnv = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "JWT_SECRET"];
+const dbConfig = getDatabaseConfig();
+const requiredEnv = ["JWT_SECRET"];
 const missingEnv = requiredEnv.filter((key) => !process.env[key]);
-if (missingEnv.length > 0) {
-  console.error(`Missing required environment variables: ${missingEnv.join(", ")}`);
+const missingDb = ["host", "user", "password", "database"].filter((key) => !dbConfig[key]);
+if (missingEnv.length > 0 || missingDb.length > 0) {
+  const missing = [
+    ...missingEnv,
+    ...missingDb.map((key) => `DB_${key.toUpperCase()}`)
+  ];
+  console.error(`Missing required environment variables: ${missing.join(", ")}`);
   process.exit(1);
 }
 

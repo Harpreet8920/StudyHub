@@ -136,15 +136,33 @@ Recommended stack:
 
 Set these environment variables for the backend service:
 
-- `DB_HOST`
-- `DB_PORT`
-- `DB_USER`
-- `DB_PASSWORD`
-- `DB_NAME`
+- `DB_HOST` or `MYSQL_HOST`
+- `DB_PORT` or `MYSQL_PORT`
+- `DB_USER` or `MYSQL_USER`
+- `DB_PASSWORD` or `MYSQL_PASSWORD`
+- `DB_NAME` or `MYSQL_DATABASE`
 - `DB_SSL` (`true` for most managed cloud MySQL services)
 - `DB_SSL_REJECT_UNAUTHORIZED` (`true` by default, can be `false` if provider requires)
 - `JWT_SECRET`
 - `FRONTEND_URL` (deployed frontend URL; supports comma-separated list)
+
+### Backend deployment (Railway)
+
+- Service root: `backend`
+- Start command: `npm start`
+- Railway MySQL connection values are supported via either individual vars or a single URL.
+
+Set these environment variables for Railway:
+
+- `MYSQL_HOST`
+- `MYSQL_PORT`
+- `MYSQL_USER`
+- `MYSQL_PASSWORD`
+- `MYSQL_DATABASE`
+- `JWT_SECRET`
+- `FRONTEND_URL`
+
+Railway also supports `DATABASE_URL` / `MYSQL_URL` / `JAWSDB_URL`; the backend now parses those connection strings automatically.
 
 ### Database deployment (Aiven MySQL)
 

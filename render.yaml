@@ -3,7 +3,7 @@
     runtime: node
     region: oregon
     plan: free
-    rootDir: studyhub/backend
+    rootDir: backend
     buildCommand: npm install
     startCommand: node server.js
     envVars:
@@ -35,7 +35,7 @@
     name: studyhub-web
     region: oregon
     plan: free
-    rootDir: studyhub/frontend/react-app
+    rootDir: frontend/react-app
     buildCommand: npm install && npm run build
     publishDir: dist
     # MANUALLY SET THIS AFTER DEPLOYING THE BACKEND:
