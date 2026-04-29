@@ -11,11 +11,16 @@ dotenv.config();
 
 const dbConfig = getDatabaseConfig();
 
-// Check for Database connection info
-// We are "OK" if we have a DATABASE_URL OR the individual components
+
+// 1. Define the secrets your app needs (like JWT)
+const requiredEnv = ["JWT_SECRET"];
+const missingEnv = requiredEnv.filter((key) => !process.env[key]);
+
+// 2. Check for Database connection info
 const hasDbUrl = !!process.env.DATABASE_URL;
 const missingDbComponents = ["host", "user", "password", "database"].filter((key) => !dbConfig[key]);
 
+// 3. Only crash if BOTH the URL and individual variables are missing
 if (missingEnv.length > 0 || (!hasDbUrl && missingDbComponents.length > 0)) {
   const missing = [
     ...missingEnv,
@@ -24,7 +29,6 @@ if (missingEnv.length > 0 || (!hasDbUrl && missingDbComponents.length > 0)) {
   console.error(`Missing required environment variables: ${missing.join(", ")}`);
   process.exit(1);
 }
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
