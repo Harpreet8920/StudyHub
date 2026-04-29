@@ -1,9 +1,4 @@
-# Render Blueprint for StudyHub Full-Stack Deployment
-# Docs: https://render.com/docs/blueprint-spec
 
-services:
-  # Backend API Service
-  - type: web
     name: studyhub-api
     runtime: node
     region: oregon
