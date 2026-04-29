@@ -18,11 +18,8 @@ function getFirstEnv(keys) {
 
 function parseDatabaseUrl(connectionString) {
   if (!connectionString) return null;
-
   try {
     const url = new URL(connectionString);
-    if (!url.hostname) return null;
-
     const auth = {
       host: url.hostname,
       port: url.port ? Number(url.port) : 3306,
@@ -30,12 +27,9 @@ function parseDatabaseUrl(connectionString) {
       password: url.password || undefined,
       database: url.pathname ? url.pathname.replace(/^\//, "") : undefined
     };
-
-    const search = url.searchParams;
-    if (search.get("ssl") === "true" || search.get("sslmode") === "require" || search.get("sslcert")) {
+    if (url.searchParams.get("ssl") === "true") {
       auth.ssl = { rejectUnauthorized: false };
     }
-
     return auth;
   } catch (error) {
     return null;
@@ -43,34 +37,25 @@ function parseDatabaseUrl(connectionString) {
 }
 
 function getDatabaseConfig() {
-  const urlConfig = parseDatabaseUrl(getFirstEnv(["DATABASE_URL", "CLEARDB_DATABASE_URL", "JAWSDB_URL", "MYSQL_URL"]));
-
+  const urlConfig = parseDatabaseUrl(getFirstEnv(["DATABASE_URL", "MYSQL_URL"]));
+  
   const rawConfig = {
-    host: getFirstEnv(["DB_HOST", "MYSQL_HOST", "HOST"]),
-    port: Number(getFirstEnv(["DB_PORT", "MYSQL_PORT", "PORT"])) || undefined,
-    user: getFirstEnv(["DB_USER", "MYSQL_USER", "USER"]),
-    password: getFirstEnv(["DB_PASSWORD", "MYSQL_PASSWORD", "PASSWORD"]),
-    database: getFirstEnv(["DB_NAME", "MYSQL_DATABASE", "DATABASE"])
+    host: getFirstEnv(["DB_HOST", "MYSQLHOST"]),
+    port: Number(getFirstEnv(["DB_PORT", "MYSQLPORT"])) || undefined,
+    user: getFirstEnv(["DB_USER", "MYSQLUSER"]),
+    password: getFirstEnv(["DB_PASSWORD", "MYSQLPASSWORD"]),
+    database: getFirstEnv(["DB_DATABASE", "DB_NAME", "MYSQLDATABASE"])
   };
 
-  const sslEnabled = parseBoolean(getFirstEnv(["DB_SSL", "MYSQL_SSL"]), false);
-  const sslConfig = sslEnabled
-    ? {
-        rejectUnauthorized: parseBoolean(process.env.DB_SSL_REJECT_UNAUTHORIZED, true)
-      }
-    : undefined;
-
+  // Prioritize URL config if individual variables are missing
   return {
     host: rawConfig.host || urlConfig?.host,
     port: rawConfig.port || urlConfig?.port || 3306,
     user: rawConfig.user || urlConfig?.user,
     password: rawConfig.password || urlConfig?.password,
     database: rawConfig.database || urlConfig?.database,
-    ssl: rawConfig.host || rawConfig.user || rawConfig.password || rawConfig.database ? sslConfig : urlConfig?.ssl
+    ssl: urlConfig?.ssl || { rejectUnauthorized: false } // Default to SSL for Railway
   };
 }
 
-module.exports = {
-  parseBoolean,
-  getDatabaseConfig
-};
+module.exports = { parseBoolean, getDatabaseConfig };
