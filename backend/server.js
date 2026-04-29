@@ -10,13 +10,20 @@ const taskRoutes = require("./routes/taskRoutes");
 dotenv.config();
 
 const dbConfig = getDatabaseConfig();
+
+// 1. Check for basic app secrets
 const requiredEnv = ["JWT_SECRET"];
 const missingEnv = requiredEnv.filter((key) => !process.env[key]);
-const missingDb = ["host", "user", "password", "database"].filter((key) => !dbConfig[key]);
-if (missingEnv.length > 0 || missingDb.length > 0) {
+
+// 2. Check for Database connection info
+// We are "OK" if we have a DATABASE_URL OR the individual components
+const hasDbUrl = !!process.env.DATABASE_URL;
+const missingDbComponents = ["host", "user", "password", "database"].filter((key) => !dbConfig[key]);
+
+if (missingEnv.length > 0 || (!hasDbUrl && missingDbComponents.length > 0)) {
   const missing = [
     ...missingEnv,
-    ...missingDb.map((key) => `DB_${key.toUpperCase()}`)
+    ...(!hasDbUrl ? missingDbComponents.map((key) => `DB_${key.toUpperCase()}`) : [])
   ];
   console.error(`Missing required environment variables: ${missing.join(", ")}`);
   process.exit(1);
