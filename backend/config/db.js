@@ -2,7 +2,9 @@ const mysql = require("mysql2/promise");
 const { getDatabaseConfig } = require("./env");
 
 const dbConfig = getDatabaseConfig();
-const pool = mysql.createPool({
+
+// Use connection string directly if available, otherwise use object
+const pool = mysql.createPool(process.env.DATABASE_URL || {
   host: dbConfig.host,
   user: dbConfig.user,
   password: dbConfig.password,
@@ -10,7 +12,6 @@ const pool = mysql.createPool({
   port: dbConfig.port,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0,
   ssl: dbConfig.ssl
 });
 
